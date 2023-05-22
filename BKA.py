@@ -1,28 +1,38 @@
 #BAK_Rechner
 
-def reduktionsfaktor():
+#Gewichtsangabe
+gewicht = float(input('Bitte geben Sie Ihr Gewicht an'))
+
+
+#Auswahl des Geschlechtes um den Reduktionsfaktor zu bestimmen
+def auswahl_Reduktionsfaktor():
     user_input = input('Sind Sie weiblich oder männlich?(w/m)').lower()
     if user_input == 'm':
-        geschlecht = 0.7
+        return 0.7
 
     elif user_input == 'w':
-        geschlecht = 0.6
+        return 0.6
 
     else:
         print ('Bitte geben Sie an ob sie weiblich oder männlich sind')
         
-    return geschlecht
     
-def berechnungALK(): #ml*(alk in % / 100)*0,8g/cm^3
+def berechnungALK(): #ml*(alk in % / 100)*0,8g/cm^3 / Berechnung des getrunkenen Alkohols
     alk_Menge = float(input('Bitte geben Sie Ihren Konsum in ml an'))*\
                 float(input('Bitte geben Sie den Alkoholanteil in Prozen an'))*0,8
     return alk_Menge
 
 
-gewicht = float(input('Bitte geben Sie Ihr Gewicht an'))
 
-
-def main(alk_Menge, gewicht, reduktionsfaktor):
-    return alk_Menge / (gewicht*reduktionsfaktor)
+#Berechnung der Promille = getrunkener Alk / (gewicht * reduktionsfaktor)
+def berechnung_Promille(alk_Menge, gewicht, geschlecht):
+    Promille = alk_Menge / (gewicht*geschlecht)
+    return Promille
     
-main()
+def main(Promille):
+    geschlecht = auswahl_Reduktionsfaktor()
+    alk_Menge = berechnungALK ()
+    Promille = berechnung_Promille(geschlecht, alk_Menge, gewicht)
+    print(Promille)
+
+main(Promille)
